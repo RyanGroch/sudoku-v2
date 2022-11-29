@@ -1,0 +1,205 @@
+@use "abstracts";
+@use "sass:math";
+
+:root {
+  --other-inputs-vertical-padding: 0;
+  --other-inputs-horizontal-padding: 0;
+  --number-pad-wrap: nowrap;
+  --max-board-width: min(95vw, 25rem);
+  --cell-font-size: 1.1rem;
+}
+
+.ui {
+  width: 100vw;
+  .grid {
+    width: 100vw;
+    display: grid;
+    position: relative;
+
+    .board-wrap {
+      padding: 2em 0;
+
+      .board-area {
+        width: var(--max-board-width);
+        height: var(--max-board-width);
+        position: relative;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        border: 1px solid black;
+
+        .board {
+          &.hidden {
+            visibility: hidden;
+          }
+
+          &.show-mistakes .cell.user-added.wrong {
+            color: abstracts.$wrong;
+          }
+
+          width: var(--max-board-width);
+          height: var(--max-board-width);
+          display: grid;
+          position: relative;
+          grid-template-columns: repeat(9, 1fr);
+
+          .cell {
+            width: calc(var(--max-board-width) / 9);
+            height: calc(var(--max-board-width) / 9);
+            border: 1px solid black;
+            text-align: center;
+            font-size: var(--cell-font-size);
+            user-select: none;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            &.notes {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              grid-template-rows: repeat(3, 1fr);
+
+              .note {
+                height: 50%;
+                width: 100%;
+                font-size: 0.5rem;
+                line-height: 0.75;
+              }
+
+              @for $i from 1 through 9 {
+                .note-#{$i} {
+                  grid-column: $i % 3;
+                  grid-row: math.ceil(math.div($i, 3));
+                }
+              }
+            }
+
+            &.user-added {
+              color: abstracts.$user-added;
+            }
+
+            $directions: (top, bottom, left, right);
+            @each $direction in $directions {
+              &.x-#{$direction} {
+                border-#{$direction}: 2px solid black;
+              }
+
+              &.xx-#{$direction} {
+                border-#{$direction}: 4px solid black;
+              }
+            }
+
+            @each $key, $val in abstracts.$modifiers {
+              &.#{$key} {
+                background-color: $val;
+              }
+            }
+          }
+        }
+
+        .select-difficulty.hidden {
+          display: none;
+        }
+
+        .select-difficulty {
+          display: grid;
+          place-items: center;
+          grid-template-columns: 1fr 1fr;
+          padding: abstracts.$base-padding;
+          gap: 0.5em;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+
+          .resume-puzzle-container {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        .overlay {
+          width: 100%;
+          background-color: abstracts.$overlay-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+
+          &.hidden {
+            display: none;
+          }
+
+          .msg {
+            font-size: abstracts.$header-font-size;
+            font-weight: 600;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .other-inputs {
+      width: 100%;
+      padding: var(--other-inputs-vertical-padding)
+        var(--other-inputs-horizontal-padding);
+
+      .number-pad {
+        width: 100%;
+        display: flex;
+        flex-wrap: var(--number-pad-wrap);
+        justify-content: space-evenly;
+        align-items: center;
+        padding-bottom: abstracts.$base-padding;
+      }
+
+      .options-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        padding: abstracts.$base-padding 0;
+      }
+
+      .secondary-options-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding-bottom: abstracts.$base-padding;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 42rem) {
+  :root {
+    --other-inputs-vertical-padding: 3em;
+    --other-inputs-horizontal-padding: 2em;
+    --number-pad-wrap: wrap;
+    --max-board-width: 50vw;
+    --cell-font-size: 1.5rem;
+  }
+
+  .ui {
+    .grid {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+}
+
+@media screen and (min-width: 65rem) {
+  :root {
+    --max-board-width: 30vw;
+  }
+}

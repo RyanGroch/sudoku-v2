@@ -1,0 +1,19 @@
+@use "abstracts";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: abstracts.$font-family;
+}
+
+h1 {
+  font-size: abstracts.$header-font-size;
+}
+
+button {
+  color: black;
+}

@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+// General colors
+$header-color: #8ad4ff;
+$overlay-color: lightgrey;
+
+// Setting colors
+$button-color: #e5e5e5;
+$button-hover-color: #c5c5c5;
+$setting-on-color: #c7ffc2;
+$settting-on-border: #9aff91;
+
+// Game colors
+$user-added: #1500ff;
+$wrong: red;
+
+// Colors for when a tile is selected
+$modifiers: (
+  selected: #17aeff,
+  same-value: #78d0ff,
+  same-group: #bae7ff,
+);
+
+// Secondary btn colors - bgColor, borderColor
+$secondaryOptionColors: (
+  new-game: (
+    #6bceff,
+    #05acff,
+  ),
+  solve-for-me: (
+    #d373ff,
+    #b412ff,
+  ),
+);
+
+// Difficulty btn colors - bgColor, borderColor
+$difficulties: (
+  easy: (
+    #adffb6,
+    #4fff61,
+  ),
+  medium: (
+    #faffba,
+    #f4fc83,
+  ),
+  hard: (
+    #ffe6b8,
+    #ffc04a,
+  ),
+  expert: (
+    #ffa6a6,
+    #ff3d3d,
+  ),
+);
+
+// Typeface
+$base-padding: 1rem;
+$header-font-size: 1.5rem;
+$font-family: Poppins, Arial, Sans-Serif;

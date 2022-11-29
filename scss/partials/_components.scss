@@ -1,0 +1,160 @@
+@use "abstracts";
+@use "sass:list";
+
+.header {
+  background-color: abstracts.$header-color;
+  padding: 1em;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 0.5em;
+  }
+
+  .description {
+    padding-bottom: 0.5em;
+  }
+}
+
+.timer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.25em;
+
+  .timer-display {
+    padding: 0 abstracts.$base-padding;
+  }
+
+  .pause {
+    width: 1.8em;
+    min-height: 1.8em;
+    border-radius: 50%;
+    border: none;
+    background-color: abstracts.$button-color;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+.difficulty {
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 1.5em;
+  padding: 0.8em;
+  cursor: pointer;
+  transition: background-color 0.1s;
+
+  .difficulty-name {
+    width: 100%;
+    text-align: center;
+    font-size: abstracts.$header-font-size;
+    font-weight: 400;
+  }
+
+  .difficulty-description {
+    width: 100%;
+  }
+}
+
+@each $difficulty, $colors in abstracts.$difficulties {
+  .difficulty-#{$difficulty} {
+    background-color: list.nth($colors, 1);
+    border-color: list.nth($colors, 2);
+
+    &:hover {
+      background-color: list.nth($colors, 2);
+    }
+  }
+}
+
+.number-selection {
+  background-color: abstracts.$button-color;
+  padding: 1em 0;
+  width: 8vw;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid abstracts.$button-hover-color;
+  transition: background-color 0.1s ease-in-out;
+
+  &:hover {
+    background-color: abstracts.$button-hover-color;
+    cursor: pointer;
+  }
+}
+
+.option {
+  width: 3em;
+  display: flex;
+  flex-direction: column;
+  .option-btn {
+    width: 3em;
+    min-height: 3em;
+    background-color: abstracts.$button-color;
+    border: 2px solid abstracts.$button-hover-color;
+    border-radius: 0.5em;
+    transition: background-color 0.1s ease-in-out;
+
+    &.on {
+      background-color: abstracts.$setting-on-color !important;
+      border-color: abstracts.$settting-on-border;
+
+      &:hover {
+        background-color: abstracts.$settting-on-border !important;
+      }
+    }
+
+    &:hover {
+      background-color: abstracts.$button-hover-color;
+      cursor: pointer;
+    }
+  }
+
+  .option-label {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}
+
+.secondary-option {
+  width: 10em;
+  min-height: 5em;
+  font-weight: 600;
+  margin: 0 2%;
+  transition: background-color 0.1s;
+  border-radius: 1em;
+  cursor: pointer;
+
+  @each $name, $vals in abstracts.$secondaryOptionColors {
+    &.#{$name} {
+      background-color: list.nth($vals, 1);
+      border: 2px solid list.nth($vals, 2);
+
+      &:hover {
+        background-color: list.nth($vals, 2);
+      }
+    }
+  }
+}
+
+.solved-msg {
+  text-align: center;
+  font-size: 2rem;
+  color: black;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+@media (min-width: 42em) {
+  .number-selection {
+    width: 25%;
+    min-height: 3em;
+    line-height: 2em;
+    margin: 1.5%;
+    font-size: 1.25rem;
+  }
+}
