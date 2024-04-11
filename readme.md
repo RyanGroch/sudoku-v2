@@ -2,7 +2,7 @@
 
 A browser app which allows the user to play Sudoku puzzles. The app generates random puzzles using recursive backtracking, and can also visualize the solving algorithm.
 
-You can visit the app [here](https://ryan-groch.github.io/sudoku-v2/).
+You can visit the app [here](https://ryangroch.github.io/sudoku-v2/).
 
 ## What is Sudoku?
 
